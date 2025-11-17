@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 4.0)
-project(balboa_32u4_student_project_g2 C)
+project(balboa_32u4_student_project_g2 CXX)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 20)
 
-include_directories(.)
+include_directories()
 
-add_executable(balboa_32u4_student_project_g2
-        balboa_balance.h
-        balboa_pid.h)
+add_executable(balboa_sensors.h
+        balboa_sensors_cpp.cpp)
