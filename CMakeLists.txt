@@ -6,4 +6,4 @@ set(CMAKE_C_STANDARD 20)
 include_directories()
 
 add_executable(balboa_sensors.h
-        balboa_sensors_cpp.cpp)
+        src/balboa_sensors_cpp.cpp)
