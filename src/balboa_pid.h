@@ -16,13 +16,13 @@ float dt = 0.01;
 
 
 float pid_controll(float angle) {
-//pid controller
-//tNow  = tNow + dt;
-e     = angle - angleOffset;
-eDot  = (e - ePrev) / dt;
-eInt  = eInt + e * dt;
-u     = kP * e + kI * eInt + kD * eDot;
-ePrev = e;
+	//pid controller
+	//tNow  = tNow + dt;
+	e     = angle - angleOffset;
+	eDot  = (e - ePrev) / dt;
+	eInt  = eInt + e * dt;
+	u     = kP * e + kI * eInt + kD * eDot;
+	ePrev = e;
 
-return u; // her må vi legge til funksjon
+	return u; // her må vi legge til funksjon
 }
