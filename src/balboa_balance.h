@@ -49,6 +49,9 @@ extern LSM6 imu;
 extern Balboa32U4Motors motors;
 extern Balboa32U4Encoders encoders;
 
+// This is the PID we use when balancing
+int32_t pid_controll();
+
 // Call this in setup() to initialize and calibrate the IMU
 void balanceSetup();
 
