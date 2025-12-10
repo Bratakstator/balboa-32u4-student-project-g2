@@ -71,7 +71,7 @@ bool isBalancing();
 bool balanceUpdateDelayed();
 
 // Used to take control of the motors but keep updates going so the robot doesn't lose track of position and angle.
-balanceUpdateSensors();
+void balanceUpdateSensors();
 
 // Used to reset encoders
 void balanceResetEncoders();
