@@ -1,4 +1,5 @@
 #include <Balboa32U4.h>
+#include <Wire.h>
 #include <LSM6.h>
 #include "balboa_balance.h"
 
