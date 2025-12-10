@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "Balance.h"
+#include "balboa_balance.h"
 
 int32_t gYZero;
 int32_t angle; // millidegrees
@@ -235,28 +235,30 @@ void balanceUpdate()
   }
 }
 
-//you can find the documentation for these values in the doc 
-int8_t kP = 20;
-int8_t kI = 1;
-int8_t kD = 3;
-int32_t angleOffset = -4000; //degrees of ofsett for balance
-
-//calculation variables
-int16_t eInt = 0;
-int16_t ePrev = 0;
-//int16_t tNow = 0;
-int16_t e = 0;
-int16_t eDot =0;
-int16_t u =0;
-int16_t dt = 0.01;
-
 int32_t pid_controll() {
+	// The PID will use degrees and seconds rather than millidegrees and milliseconds.
+	// This will be used to convert angle in millidegrees to degrees and UPDATE_TIME_MS to seconds.
+	const int16_t PROPORTIONS = 1000;
+	
+	static int8_t kP = 20; // Proportional
+	static int8_t kI =  1; // Integral
+	static int8_t kD =  3; // Derivative
+	
+	static int32_t angleOffset = 4; // Degrees of offset for balance
+	
+	// Variables for calculation
+	static int16_t e     = 0;
+	static int16_t eInt  = 0;
+	static int16_t eDot  = 0;
+	static int16_t ePrev = 0;
+	
 	//pid controller
-	//tNow  = tNow + dt;
-	e     = angle - angleOffset;
-	eDot  = (e - ePrev) / dt;
-	eInt  = eInt + e * dt;
-	u     = kP * e + kI * eInt + kD * eDot;
+	e     = angleOffset - (angle / PROPORTIONS); // angle comes from somewhere else in the code
+	eDot  = (e - ePrev) / (UPDATE_TIME_MS / PROPORTIONS); // UPDATE_TIME_MS = 10 milliseconds
+	eInt  = eInt + e * (UPDATE_TIME_MS / PROPORTIONS);
+	
+	int16_t u = kP * e + kI * eInt + kD * eDot;
+	
 	ePrev = e;
 
 	return u; // her må vi legge til funksjon
