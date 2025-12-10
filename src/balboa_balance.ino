@@ -16,9 +16,7 @@ void setup() {
 void loop() {
 
   balanceUpdate();
-  if (isBalancing()) {
-    ledYellow(1);
-  }
+  //if (isBalancing()) {ledYellow(1);}
 
   // Set ledRed to true when the last update was too slow
   ledRed(balanceUpdateDelayed());
