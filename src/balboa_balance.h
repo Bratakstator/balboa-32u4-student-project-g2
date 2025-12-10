@@ -20,14 +20,14 @@ const int16_t ANGLE_RATE_RATIO = 140;
 // These relate to the PID, will probably be removed as we are using a PID of sorts.
 const int16_t ANGLE_RESPONSE = 11;
 const int16_t DISTANCE_RESPONSE = 73;
-const int16_t DISTANCE_DIFF_RESPONSE = -50
+const int16_t DISTANCE_DIFF_RESPONSE = -50;
 
 // SPEED_RESPONSE is used to supress the large back-and-forth oscillations caised nu DISTANCE_RESPONSE.
 // Adjust until oscillation die off after a few cycles
 const int16_t SPEED_RESPONSE = 3300;
 
 // The code bases itself on a 100Hz update rate.
-const uint8_t = UPDATE_TIME_MS = 10;
+const uint8_t UPDATE_TIME_MS = 10;
 
 // How many measurements to calibrate the gyro.
 const uint8_t CALIBRATION_ITERATIONS = 100;
