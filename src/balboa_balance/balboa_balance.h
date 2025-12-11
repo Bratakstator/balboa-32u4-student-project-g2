@@ -18,8 +18,8 @@ const int16_t MOTOR_SPEED_LIMIT = 300;
 const int16_t ANGLE_RATE_RATIO = 140;
 
 // These relate to the PID, will probably be removed as we are using a PID of sorts.
-const int16_t ANGLE_RESPONSE = 11;
-const int16_t DISTANCE_RESPONSE = 73;
+const int16_t ANGLE_RESPONSE = 16;
+const int16_t DISTANCE_RESPONSE = 6;
 const int16_t DISTANCE_DIFF_RESPONSE = -50;
 
 // SPEED_RESPONSE is used to supress the large back-and-forth oscillations caised nu DISTANCE_RESPONSE.
@@ -49,19 +49,11 @@ extern LSM6 imu;
 extern Balboa32U4Motors motors;
 extern Balboa32U4Encoders encoders;
 
-// This is the PID we use when balancing
-int32_t pid_controll();
-
 // Call this in setup() to initialize and calibrate the IMU
 void balanceSetup();
 
 // Call this in loop() to run the full balancing algorithm
 void balanceUpdate();
-
-// Call this function to set a driving speed in ticks/ms.
-// This will adjust the robot's encoder measurements every update cycle.
-// Differing values results in turning.
-void balanceDrive(int16_t leftSpeed, int16_t rightSpeed);
 
 // Returns true if the robot is trying to balance.
 bool isBalancing();
@@ -72,6 +64,3 @@ bool balanceUpdateDelayed();
 
 // Used to take control of the motors but keep updates going so the robot doesn't lose track of position and angle.
 void balanceUpdateSensors();
-
-// Used to reset encoders
-void balanceResetEncoders();

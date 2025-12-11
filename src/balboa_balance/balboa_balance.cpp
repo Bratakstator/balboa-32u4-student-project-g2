@@ -6,10 +6,8 @@ int32_t angle; // millidegrees
 int32_t angleRate; // degrees/s
 int32_t distanceLeft;
 int32_t speedLeft;
-int32_t driveLeft;
 int32_t distanceRight;
 int32_t speedRight;
-int32_t driveRight;
 int16_t motorSpeed;
 bool isBalancingStatus = false;
 bool balanceUpdateDelayedStatus;
@@ -154,26 +152,6 @@ void integrateEncoders()
   lastCountsRight = countsRight;
 }
 
-void balanceDrive(int16_t leftSpeed, int16_t rightSpeed)
-{
-  driveLeft = leftSpeed;
-  driveRight = rightSpeed;
-}
-
-void balanceDoDriveTicks()
-{
-  distanceLeft -= driveLeft;
-  distanceRight -= driveRight;
-  speedLeft -= driveLeft;
-  speedRight -= driveRight;
-}
-
-void balanceResetEncoders()
-{
-  distanceLeft = 0;
-  distanceRight = 0;
-}
-
 void balanceUpdateSensors()
 {
   imu.read();
@@ -193,7 +171,6 @@ void balanceUpdate()
   lastMillis = ms;
 
   balanceUpdateSensors();
-  balanceDoDriveTicks();
 
   if (isBalancingStatus)
   {
@@ -233,33 +210,4 @@ void balanceUpdate()
       count = 0;
     }
   }
-}
-
-int32_t pid_controll() {
-	// The PID will use degrees and seconds rather than millidegrees and milliseconds.
-	// This will be used to convert angle in millidegrees to degrees and UPDATE_TIME_MS to seconds.
-	const int16_t PROPORTIONS = 1000;
-	
-	static int8_t kP = 20; // Proportional
-	static int8_t kI =  1; // Integral
-	static int8_t kD =  3; // Derivative
-	
-	static int32_t angleOffset = 4; // Degrees of offset for balance
-	
-	// Variables for calculation
-	static int16_t e     = 0;
-	static int16_t eInt  = 0;
-	static int16_t eDot  = 0;
-	static int16_t ePrev = 0;
-	
-	//pid controller
-	e     = angleOffset - (angle / PROPORTIONS); // angle comes from somewhere else in the code
-	eDot  = (e - ePrev) / (UPDATE_TIME_MS / PROPORTIONS); // UPDATE_TIME_MS = 10 milliseconds
-	eInt  = eInt + e * (UPDATE_TIME_MS / PROPORTIONS);
-	
-	int16_t u = kP * e + kI * eInt + kD * eDot;
-	
-	ePrev = e;
-
-	return u; // her må vi legge til funksjon
 }
