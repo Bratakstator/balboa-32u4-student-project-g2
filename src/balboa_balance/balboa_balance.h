@@ -17,7 +17,7 @@ const int16_t MOTOR_SPEED_LIMIT = 300;
 // 90 000 / 140 = 642 deg/s
 const int16_t ANGLE_RATE_RATIO = 140;
 
-// These relate to the PID.
+// These relate to a PID-like behaviour.
 const int16_t ANGLE_RESPONSE = 16;
 const int16_t DISTANCE_RESPONSE = 6;
 const int16_t DISTANCE_DIFF_RESPONSE = -50;
