@@ -51,9 +51,6 @@ void loop()
 {
   unsigned int batteryVoltage = readBatteryMillivolts();
   Serial.println(batteryVoltage);
-  
-  static bool enableSong = false;
-  static bool enableDrive = false;
 
   balanceUpdate();
 
